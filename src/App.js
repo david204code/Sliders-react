@@ -12,13 +12,22 @@ function App() {
     // get last index of the array
     const lastIndex = people.length - 1;
     if(index < 0){
-      setIndex(lastIndex)
+      setIndex(lastIndex);
     }
     if(index > lastIndex){
-      setIndex(0)
+      setIndex(0);
     }
   // run when index or people array changes
-  }, [index, people])
+  }, [index, people]);
+
+  useEffect(() => {
+    let slider = setInterval(() => {
+      setIndex(index + 1)
+    }, 3000);
+    // add clean up function to stop setInterval from invoking repeatedly 
+    return () => clearInterval(slider)
+  // everytime index changes, set interval
+  }, [index]);
 
   return(
     <>
